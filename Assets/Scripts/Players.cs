@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Players : MonoBehaviour
 {
-    public float speed;
+    public float speed, sightSpeed;
+    public GameObject sight, projectile;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +16,11 @@ public class Players : MonoBehaviour
     void Update()
     {
         transform.position += new Vector3(0, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
+        sight.transform.Rotate(new Vector3(0, 0, -Input.GetAxis("Horizontal") * sightSpeed * Time.deltaTime));
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            GameObject tempProjectile = Instantiate(projectile, sight.transform.position, sight.transform.rotation);
+        }
     }
 }
